@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Blog - Demeter</title>
+    <link media="all" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+    <link href="/blog.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <header th:replace="blog/fragments/header::template"></header>
+
+    <!--/*@thymesVar id="menuItems" type="List<com.damiannguyen.blog.menu.MenuDto>"*/-->
+    <div th:replace="blog/fragments/menu::template(items = ${menuItems})"></div>
+
+    <div th:replace="blog/fragments/banner::template"></div>
+
+    <div class="row mb-2">
+        <div class="col-md-6">
+            <div th:replace="blog/fragments/post-widget::template"></div>
+        </div>
+        <div class="col-md-6">
+            <div th:replace="blog/fragments/post-widget::template"></div>
+        </div>
+    </div>
+</div>
+
+<main role="main" class="container">
+    <div class="row">
+        <div class="col-md-8 blog-main">
+            <!--/*@thymesVar id="postItems" type="java.util.List<com.damiannguyen.blog.post.PostDto>"*/-->
+            <th:block th:each="post : ${postItems}">
+                <div th:replace="blog/fragments/post::template(post = ${post})"></div>
+            </th:block>
+        </div>
+        <aside class="col-md-4 blog-sidebar">
+            <div th:replace="blog/fragments/about::template"></div>
+            <div th:replace="blog/fragments/archives::template"></div>
+            <div th:replace="blog/fragments/elsewhere::template"></div>
+        </aside>
+    </div>
+</main>
+<footer th:replace="blog/fragments/footer::template"></footer>
+</body>
+
+</html>
